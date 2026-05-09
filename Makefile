@@ -32,7 +32,7 @@ validate-tabs:
 # Quick preview of title page only (for rapid iteration)
 title-preview: $(OUTDIR)
 	@./scripts/generate-buildinfo.sh
-	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error -outdir=$(OUTDIR) -jobname=man-debate-titlepage src/targets/titlepage-preview.tex || true
+	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error -outdir=$(OUTDIR) -jobname=man-debate-titlepage src/targets/titlepage-preview.tex
 
 # Delta target: make delta-<shortsha>
 .PHONY: delta-%
