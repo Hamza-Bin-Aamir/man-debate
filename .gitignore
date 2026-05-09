@@ -23,3 +23,5 @@
 # OS/editor
 .DS_Store
 .vscode/
+
+buildinfo.tex
