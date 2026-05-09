@@ -25,6 +25,8 @@ You need a LaTeX distribution that includes `latexmk` (e.g. TeX Live).
 
 Outputs are written to `build/`.
 
+TODO: PRINTED CHANGELOGS.
+
 ## What is a "matter file"
 
 This is a buzzword that is commonly thrown around by British Parliamentary (BP) debaters to refer to this form of document. "Matter" refers to the content of a case, particularly the arguments, examples, and reasoning. Thus, a "matter file" is a document that already has a bunch of matter stuffed into it.

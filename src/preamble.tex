@@ -171,6 +171,66 @@
   }%
 }
 
+% --- Per-book table of contents ---
+\newcommand{\CurrentBookTOCEntries}{}
+\newcommand{\CurrentBookLabel}{}
+
+% Global TOC registry for each book (persists across builds)
+\newcommand{\BookTOCFND}{}
+
+% Simple counter-based TOC line renderer (avoids nested enumerate complexity)
+\newcounter{bTOClvlI}
+\newcounter{bTOClvlII}
+\newcounter{bTOClvlIII}
+\newcommand{\BookTOCLine}[3]{%
+  % #1 = level (0-3), #2 = title, #3 = label (unused)
+  \ifcase#1\relax
+    % Level 0: do nothing
+  \or
+    % Level 1
+    \stepcounter{bTOClvlI}%
+    \setcounter{bTOClvlII}{0}%
+    \setcounter{bTOClvlIII}{0}%
+    \par\noindent\textbf{\arabic{bTOClvlI}.}\quad #2\par
+  \or
+    % Level 2
+    \stepcounter{bTOClvlII}%
+    \setcounter{bTOClvlIII}{0}%
+    \par\noindent\hspace*{1.2em}\textbf{\alph{bTOClvlII}.}\quad #2\par
+  \or
+    % Level 3
+    \stepcounter{bTOClvlIII}%
+    \par\noindent\hspace*{2.4em}\textbf{\roman{bTOClvlIII}.}\quad #2\par
+  \fi
+}
+
+\makeatletter
+\newcommand{\AddBookTOCEntry}[4]{%
+  % #1 = book label, #2 = level, #3 = title, #4 = unused
+  % Append to the specified book's TOC macro
+  \expandafter\g@addto@macro\csname BookTOC#1\endcsname{\BookTOCLine{#2}{#3}{#4}}%
+}
+\newcommand{\RecordBookTOCEntry}[3]{%
+  \AddBookTOCEntry{\CurrentBookLabel}{#1}{#2}{#3}%
+  \protected@write\@auxout{}{%
+    \string\AddBookTOCEntry{\CurrentBookLabel}{#1}{#2}{#3}%
+  }%
+}
+\newcommand{\PrintBookTOC}{%
+  \expandafter\ifx\csname BookTOC\CurrentBookLabel\endcsname\relax
+    % Macro doesn't exist
+  \else
+    \ifstrempty{\csname BookTOC\CurrentBookLabel\endcsname}{}{%
+      \section*{Contents}%
+      \small
+      % Execute the custom TOC lines in standard text mode
+      \csname BookTOC\CurrentBookLabel\endcsname
+      \normalsize
+    }%
+  \fi
+}
+\makeatother
+
 \newcommand{\listoftabs}{%
   \section*{Navigation}
   \begingroup
@@ -182,18 +242,22 @@
 % Heading wrappers so the navigation list is complete and tab-aware.
 \newcommand{\MatterBook}[2]{%
   \settablabel{#2}%
+  \renewcommand{\CurrentBookLabel}{#2}%
   \MatterBookDirect{#1}{#2}%
   \chapter{#1}%
+  \PrintBookTOC%
   \RecordMatterNavEntry{0}{#1}%
 }
 
 \newcommand{\MatterChapter}[1]{%
   \section{#1}%
+  \RecordBookTOCEntry{1}{#1}{}%
   \RecordMatterNavEntry{1}{#1}%
 }
 
 \newcommand{\MatterSection}[1]{%
   \subsection{#1}%
+  \RecordBookTOCEntry{2}{#1}{}%
   \RecordMatterNavEntry{2}{#1}%
 }
 
@@ -205,8 +269,50 @@
   \clearpage
   \setcredit{#3}
   \subsubsection{#2}\label{#1}
+  \RecordBookTOCEntry{3}{#2}{}%
   \RecordMatterNavEntry{3}{#2}%
   \tabmarker{\CurrentTabLabel}
+}
+
+\makeatletter
+% 1. The Token-Splitting Engine
+\def\FakeSC#1{\@FakeSC#1\@nil}
+\def\@FakeSC#1#2\@nil{\textbf{\MakeUppercase{#1}{\scriptsize\MakeUppercase{#2}}}}
+\makeatother
+
+% 2. The Custom Sectioning Wrapper
+\newcommand{\msubsubsection}[1]{%
+  % The optional argument [#1] ensures the TOC gets plain text.
+  % The required argument {\FakeSC{#1}} prints the stylised text.
+  \subsubsection[#1]{\FakeSC{#1}}%
+}
+
+% --- Checklist Environment & Row Command ---
+% --- Checklist Environment & Row Command ---
+
+\newenvironment{checklist}[1]{%
+  % 1. Print the title
+  \par\vspace*{1em}\noindent\textbf{#1}\par\nopagebreak\vspace*{0.5em}
+  % 2. Open the table using the primitive \tabularx
+  \noindent
+  \renewcommand{\arraystretch}{1.5}
+  \tabularx{\textwidth}{|>{\raggedright\arraybackslash}p{0.22\textwidth}|
+                                 >{\raggedright\arraybackslash}X|
+                                 >{\raggedright\arraybackslash}X|}
+  \hline
+  % 3. The locked-in headers
+  \multicolumn{1}{|c|}{\textbf{ITEM}} & 
+  \multicolumn{1}{c|}{\textbf{DESCRIPTION}} & 
+  \multicolumn{1}{c|}{\textbf{EXAMPLE}} \\
+  \hline
+}{%
+  % 4. Close the table using the primitive \endtabularx
+  \endtabularx\par\vspace*{1em}
+}
+
+% The data entry command remains unchanged
+\newcommand{\checkrow}[3]{%
+  #1 & #2 & #3 \\ \hline
 }
 
 % Lists: compact and readable

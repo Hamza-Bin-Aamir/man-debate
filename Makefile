@@ -41,13 +41,11 @@ delta-%: $(OUTDIR)
 	CHANGED=`git diff --name-only $$HASH..HEAD -- content || true`; \
 	if [ -z "$$CHANGED" ]; then echo "No content changes since $$HASH"; exit 0; fi; \
 	TMP=build/delta-$$HASH.tex; mkdir -p build; \
-	cat > $$TMP <<'TEX'
-	\documentclass[11pt]{article}
-	\input{src/metadata.tex}
-	\input{src/preamble.tex}
-	\begin{document}
-	\input{src/titlepage.tex}
-	TEX
+	( echo '\documentclass[11pt]{article}'; \
+	  echo '\input{src/metadata.tex}'; \
+	  echo '\input{src/preamble.tex}'; \
+	  echo '\begin{document}'; \
+	  echo '\input{src/titlepage.tex}' ) > $$TMP; \
 	for f in $$CHANGED; do echo "Including $$f"; echo "\\input{$$f}" >> $$TMP; done; \
 	echo "\\end{document}" >> $$TMP; \
 	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error -outdir=build -jobname=man-debate-delta-$$HASH $$TMP || true
