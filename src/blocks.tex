@@ -1,0 +1,17 @@
+% Content-type blocks
+\usepackage{tcolorbox}
+\tcbset{colback=white,colframe=black!30,boxrule=0.4pt,arc=0pt,left=1mm,right=1mm,top=0.6mm,bottom=0.6mm}
+
+\newtcolorbox{FactsheetBox}{title=FACTSHEET,fonttitle=\bfseries\ttfamily}
+\newtcolorbox{CaseStudyBox}{title=CASE STUDY,fonttitle=\bfseries\ttfamily}
+\newtcolorbox{FirstPrinciplesBox}{title=FIRST PRINCIPLES,fonttitle=\bfseries\ttfamily}
+\newtcolorbox{StockArgBox}{title=STOCK ARGUMENT,fonttitle=\bfseries\ttfamily}
+\newtcolorbox{ChecklistBox}{title=CHECKLIST,fonttitle=\bfseries\ttfamily}
+\newtcolorbox{DefinitionBox}{title=DEFINITION,fonttitle=\bfseries\ttfamily}
+
+\newenvironment{Checklist}{\begin{ChecklistBox}\begin{itemize}}{\end{itemize}\end{ChecklistBox}}
+\newenvironment{StockArgument}{\begin{StockArgBox}}{\end{StockArgBox}}
+\newenvironment{FirstPrinciples}{\begin{FirstPrinciplesBox}}{\end{FirstPrinciplesBox}}
+\newenvironment{CaseStudy}{\begin{CaseStudyBox}}{\end{CaseStudyBox}}
+\newenvironment{Factsheet}{\begin{FactsheetBox}}{\end{FactsheetBox}}
+\newenvironment{Definition}{\begin{DefinitionBox}}{\end{DefinitionBox}}

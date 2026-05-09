@@ -1,0 +1,23 @@
+\documentclass[11pt]{article}
+
+\input{src/metadata.tex}
+\input{src/preamble.tex}
+\input{src/blocks.tex}
+
+\title{\MatterTitle\\\large Definitions (Standalone)}
+\author{Hamza Bin Aamir}
+\date{\MatterDate}
+
+\begin{document}
+\input{src/titlepage.tex}
+% Hierarchical tab-aware navigation list.
+\listoftabs
+
+% Set a custom tab label for this standalone output.
+\settablabel{DEF}
+
+% Pull only the Definitions part from the book for now.
+% (As the repo grows, we'll promote each Section into its own file.)
+\input{content/book-01/section-definitions-only.tex}
+
+\end{document}

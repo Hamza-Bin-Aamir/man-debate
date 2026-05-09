@@ -1,0 +1,71 @@
+% Formal technical manual title page
+\begin{titlepage}
+  \thispagestyle{empty}
+  \centering
+  
+  \vspace*{0.8cm}
+  
+  % Centered logo mark
+  \includegraphics[width=0.18\textwidth]{content/images/logo.png}\includegraphics[width=0.18\textwidth]{content/images/flag.png}\par
+  
+  \vspace{0.9cm}
+  
+  % Repository URL (subtle top)
+  {\TitleSmall{\href{\RepoURL}{\RepoURL}}\par}
+  
+  \vspace{1.2cm}
+  
+  % Main title
+  {\TitleLarge{\MatterTitle}\par}
+  
+  \vspace{0.5cm}
+  
+  % Subtitle in small caps
+  {\large\scshape\MatterSubtitle\par}
+  
+  \vspace{1.5cm}
+  
+  % NATOPS-style border index (black boxes on right margin, full page height)
+  \begin{textblock*}{35mm}(175mm,0mm)
+    {%
+      \setlength{\parskip}{0.6em}%
+      \raggedright
+      \parbox[t][\paperheight][t]{35mm}{%
+        \listofbooksasboxes
+      }%
+    }
+  \end{textblock*}
+
+  \vspace{1.0cm}
+  
+  % Edition section with monospaced technical metadata
+  \begin{center}
+    \setlength{\fboxsep}{12pt}
+    \setlength{\fboxrule}{0.8pt}
+    \fbox{\parbox{0.55\textwidth}{\centering
+      {\TitleMedium{Edition}}\\[0.4cm]
+      {\TitleMono{\MatterVersion}}\\[0.4cm]
+      {\TitleSmall{\MatterDate}}
+    }}
+  \end{center}
+  
+  \vspace{1.2cm}
+  
+  \vfill
+  
+  % Print specification (monospaced, formal)
+  {\centering
+    {\TitleSmall{\textbf{Print Specification}}}\\[0.3cm]
+    {\TitleMono{\PrintSpec}}\par
+  }
+  
+  \vspace{0.8cm}
+  
+  \vspace{0.6cm}
+  
+  % Maintainer attribution
+  {\TitleSmall{Editor: Hamza Bin Aamir}\par}
+  
+  \vspace{0.6cm}
+
+\end{titlepage}

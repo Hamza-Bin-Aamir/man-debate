@@ -1,0 +1,92 @@
+\MatterBook{Foundations}{FND}
+
+\MatterChapter{How to Use This File}
+This is not a textbook, it is a toolkit. You are not supposed to read this matter file linearly, instead heavily rely on the table of contents to jump between sections. This resource is divided into "books," each book comes with its own table of contents and tabs for you to navigate it effectively.
+
+
+\MatterSubsection{subsec:foundations:workflow}{Replacement workflow}{Hamza Bin Aamir}
+This matter file is designed for binder use --- the idea is that you can print it out once and then only reprint modified sections using the \texttt{make delta-<commit-short-hash>} command. 
+That way, the carbon footprint (and cost) of reprinting hundreds of pages is minimised while still offering the ability to keep this a living document.
+
+Once you print out the delta pages, you can simply open the binder, slot in the replaced pages, close the binder and voila your binder is now up-to-date with the latest version!
+\begin{checklist}{Replacement Steps:}
+  \checkrow{Find your current commit hash}
+           {If you never updated the document, it is going to be the commit hash (the alphanumeric code after the + in the edition) on the title page. Otherwise, use the commit hash on the version number on the footer of a page from your latest update.}
+           {For example, as of writing this guide, the commit hash is 4bef4df}
+
+  \checkrow{Update the repo to the latest version}
+           {Open the repository folder in your command line and type in: \texttt{git pull origin main}. You should either get an output saying "\texttt{Already up to date.}" or "\texttt{n files changed, a insertions(+), b deletions(-)}".}
+           {-}
+
+  \checkrow{Make a delta pdf}
+           {In the same terminal, run the command: \texttt{make clean} followed by \texttt{make delta-<commit-short-hash>}. It should read "\texttt{All targets (build/c.pdf) are up-to-date}"}
+           {For me, running \texttt{make delta-f32657b} yields \texttt{Latexmk: All targets (build/man-debate-delta- f32657b.pdf) are up-to-date}}
+
+  \checkrow{Print and place the pages}
+           {Print the pages and place them in their relevant place. Reference the changelog. If they are edits, you can replace the old page. If they are additions, you should use the table of contents to determine the correct location to place them in. If there are deletions in the changelog, do them accordingly.}
+           {-}
+\end{checklist}
+
+\MatterSubsection{subsec:foundations:resourcetypes}{Types of resources}{Hamza Bin Aamir}
+\msubsubsection{Checklists}
+
+\textbf{How they work:} Step-by-step guides for specific activities in a debate. Use them as a rough guideline rather than a rule.
+
+\textbf{How to find:} Checklists titles are “triggers,” which will be the situations where the checklist will benefit you most. Check the table of contents to quickly jump to your situation.
+
+\textbf{Note:} These checklists are for you only, do not blindly trust them as no one else will have these checklists. They are to help you get started or to navigate tricky situations.
+
+\begin{checklist}{Format:}
+  \checkrow{Name of the Step}
+           {The step will be explained in detail here, including how to do it and any other notes.}
+           {Worked example of the step...}
+\end{checklist}
+\msubsubsection{Case Studies and Precedents}
+
+\textbf{Purpose:} Grasp the workings of a specific system or situation.
+
+\textbf{How to find:} The main heading will be by situation in the table of contents, with subheadings for specific cases.
+
+\textbf{Format:} TL;DR (Main elements of the case), Context, Mechanisms, Outcomes. 
+
+\msubsubsection{Glossaries}
+
+\textbf{Purpose:} Common terminology used in debate, defined in the way they are used in debates.
+
+\textbf{How to find:} Divided by debate area – eg. economics, intl. relations, social movements, etc.
+
+\textbf{Format:} Term – Definition
+
+\msubsubsection{Factsheets}
+
+\textbf{Purpose:} Important and relevant information.
+
+\textbf{How to find:} Divided by debate area – eg. economics, intl. relations, social movements, etc.
+
+\msubsubsection{First Principles}
+
+\textbf{Purpose:} Ideas that are the axioms of arguments, especially principle arguments.
+
+\textbf{How to find:} First principles titles will be visible in the table of contents, the titles include the claim.
+
+\msubsubsection{Stock Arguments}
+
+\textbf{Purpose:} Arguments that apply to a wide variety of debates.
+
+\textbf{How to find:} Argument titles will be visible in the table of contents, the titles include the main point of the argument.
+
+\msubsubsection{Pre-Written Weighs}
+
+\textbf{Purpose:} Common weighing scenarios. Quickly glance during prep, reference during debate.
+
+\textbf{How to find:} Weighs will be titled X vs. Y vs. Z vs. … in the table of contents.
+
+\msubsubsection{Stakeholder Profiles}
+
+\textbf{Purpose:} For actor debate or impacting arguments, explains the motivations and needs of common stakeholders.
+
+\textbf{How to find:} Will be named by stakeholder in the table of contents.
+
+
+
+

@@ -2,6 +2,31 @@
 
 _man debate_ is a project that aims to create the "man pages" for British Parliamentary debating. It aims to provide an open source, comprehensive, and accessible resource/tool for debaters, coaches, and judges to build cases in British Parliamentary matches or other debates.
 
+## LaTeX output
+
+This repository is structured as a modular LaTeX project that builds:
+
+- A single, full matter file PDF
+- Smaller standalone PDFs (e.g. a single Book or Section) for portability and selective reprinting
+
+The layout is print-first (A4, binder-friendly). There are intentionally no printed page numbers. Instead, every page includes:
+
+- A visible version/date
+- A per-subsection credit line
+- A `TAB:` label intended to tell the printer/binder which physical tab/divider the page belongs under
+
+### Build
+
+You need a LaTeX distribution that includes `latexmk` (e.g. TeX Live).
+
+- Full PDF: `make full`
+- Book 01 PDF: `make book-01`
+- Standalone Definitions section PDF: `make section-definitions`
+
+Outputs are written to `build/`.
+
+TODO: PRINTED CHANGELOGS.
+
 ## What is a "matter file"
 
 This is a buzzword that is commonly thrown around by British Parliamentary (BP) debaters to refer to this form of document. "Matter" refers to the content of a case, particularly the arguments, examples, and reasoning. Thus, a "matter file" is a document that already has a bunch of matter stuffed into it.
