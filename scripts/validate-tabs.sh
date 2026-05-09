@@ -13,7 +13,7 @@ fi
 USED=$(git ls-files content | xargs grep -h "\\settablabel{" || true | sed -n "s/.*\\settablabel{\([^}]*\)}.*/\1/p" | sort -u)
 MISSING=0
 for code in $USED; do
-  if ! grep -q "^$code\t" $REG; then
+  if ! grep -q "^${code}"$'\t' "$REG"; then
     echo "Missing tab code in registry: $code"; MISSING=1
   fi
 done
