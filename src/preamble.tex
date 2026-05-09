@@ -22,6 +22,7 @@
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage[absolute,overlay]{textpos}
 
 % --- Minimal man-page-ish styling ---
 \setlength{\parindent}{0pt}
@@ -64,6 +65,13 @@
 
 \fancyfoot[LE,RO]{\small\ttfamily v\MatterVersion\; (\MatterDate)}
 \fancyfoot[LO,RE]{\small\ttfamily credit: \CurrentCredit}
+
+% Chapter opening pages use plain style - make it empty (no page numbers)
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
 
 % Keep headings from forcing lowercase marks
 \makeatletter
@@ -112,7 +120,34 @@
   \par
 }
 
+% --- Book registry for title page (NATOPS-style chapter listing) ---
+\newcommand{\MatterBookEntries}{}
+\newcommand{\MatterBookBoxEntries}{}
+\newcommand{\MatterBookLine}[2]{%
+  \par\noindent
+  #1\dotfill\texttt{#2}\par
+}
+\newcommand{\MatterBookLineAsBox}[2]{%
+  \colorbox[HTML]{353535}{\makebox[35mm][c]{%
+    \parbox[c][20mm]{33mm}{\centering
+      \vspace{0.4em}
+      \textcolor{white}{\fontsize{11pt}{13pt}\selectfont #1}\\[0.3cm]
+      \textcolor{white}{\fontsize{10pt}{11pt}\selectfont \texttt{#2}}
+      \vspace{0.4em}
+    }%
+  }}\par\vspace{0.8em}%
+}
+
 \makeatletter
+\newcommand{\RecordMatterBook}[2]{%
+  \g@addto@macro\MatterBookEntries{\MatterBookLine{#1}{#2}}%
+  \g@addto@macro\MatterBookBoxEntries{\MatterBookLineAsBox{#1}{#2}}%
+}
+\newcommand{\MatterBookDirect}[2]{%
+  \protected@write\@auxout{}{%
+    \string\RecordMatterBook{#1}{#2}%
+  }%
+}
 \newcommand{\AddMatterNavEntry}[3]{\g@addto@macro\MatterNavEntries{\MatterNavLine{#1}{#2}{#3}}}
 \newcommand{\RecordMatterNavEntry}[2]{%
   \AddMatterNavEntry{#1}{#2}{\CurrentTabLabel}%
@@ -121,6 +156,20 @@
   }%
 }
 \makeatother
+
+\newcommand{\listofbooks}{%
+  \ifstrempty{\MatterBookEntries}{}{%
+    \MatterBookEntries
+  }%
+}
+
+\newcommand{\listofbooksasboxes}{%
+  \ifstrempty{\MatterBookBoxEntries}{}{%
+    \vfill
+    \MatterBookBoxEntries
+    \vfill
+  }%
+}
 
 \newcommand{\listoftabs}{%
   \section*{Navigation}
@@ -133,6 +182,7 @@
 % Heading wrappers so the navigation list is complete and tab-aware.
 \newcommand{\MatterBook}[2]{%
   \settablabel{#2}%
+  \MatterBookDirect{#1}{#2}%
   \chapter{#1}%
   \RecordMatterNavEntry{0}{#1}%
 }

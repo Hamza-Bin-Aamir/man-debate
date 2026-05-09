@@ -16,15 +16,23 @@
   \vspace{1.2cm}
   
   % Main title
-  {\TitleLarge{\MakeUppercase{\MatterTitle}}\par}
+  {\TitleLarge{\MatterTitle}\par}
   
   \vspace{0.5cm}
   
   % Subtitle in small caps
   {\large\scshape\MatterSubtitle\par}
   
-  \vspace{1.2cm}
+  \vspace{1.5cm}
   
+  % NATOPS-style border index (black boxes on right margin, full page height)
+  \begin{textblock*}{35mm}(175mm,0mm)
+    \setlength{\textheight}{297mm}
+    \setlength{\parskip}{0.6em}
+    \raggedright
+    \listofbooksasboxes
+  \end{textblock*}
+
   \vspace{1.0cm}
   
   % Edition section with monospaced technical metadata
@@ -53,7 +61,7 @@
   \vspace{0.6cm}
   
   % Maintainer attribution
-  {\TitleSmall{Maintainer: Hamza Bin Aamir}\par}
+  {\TitleSmall{Editor: Hamza Bin Aamir}\par}
   
   \vspace{0.6cm}
 
