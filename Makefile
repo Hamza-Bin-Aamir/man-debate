@@ -48,7 +48,7 @@ delta-%: $(OUTDIR)
 	  echo '\input{src/titlepage.tex}' ) > $$TMP; \
 	for f in $$CHANGED; do echo "Including $$f"; echo "\\input{$$f}" >> $$TMP; done; \
 	echo "\\end{document}" >> $$TMP; \
-	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error -outdir=build -jobname=man-debate-delta-$$HASH $$TMP || true
+	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error -outdir=build -jobname=man-debate-delta-$$HASH $$TMP
 
 clean:
 	$(LATEXMK) -C -outdir=$(OUTDIR) src/main.tex || true
