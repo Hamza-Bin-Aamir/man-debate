@@ -10,7 +10,7 @@ FND	Foundations
 EOF
   echo "Created $REG — please edit to add tab codes.";
 fi
-USED=$(git ls-files content | xargs grep -h "\\settablabel{" || true | sed -n "s/.*\\settablabel{\([^}]*\)}.*/\1/p" | sort -u)
+USED=$(git ls-files content | xargs -r grep -h "\\settablabel{" || true | sed -n "s/.*\\settablabel{\([^}]*\)}.*/\1/p" | sort -u)
 MISSING=0
 for code in $USED; do
   if ! grep -q "^${code}"$'\t' "$REG"; then
