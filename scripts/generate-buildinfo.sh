@@ -13,8 +13,8 @@ cat > src/buildinfo.tex <<'EOF'
 \renewcommand{\MatterDate}{%HUMANDATE%}
 \newcommand{\MatterDateISO}{%DATE%}
 \newcommand{\BuildShortSha}{%SHA%}
-\newcommand{\PrintSpec}{%PRINTSPEC%}
-\newcommand{\RepoURL}{%REPO%}
+\renewcommand{\PrintSpec}{%PRINTSPEC%}
+\renewcommand{\RepoURL}{%REPO%}
 EOF
 sed -i "s|%CALVER%|${CALVER}|; s|%SHA%|${SHA}|; s|%HUMANDATE%|${HUMANDATE}|; s|%DATE%|${DATE}|; s|%PRINTSPEC%|${PRINTSPEC}|; s|%REPO%|${REPO}|" src/buildinfo.tex
 printf "Wrote src/buildinfo.tex (version %s+%s)\n" "$CALVER" "$SHA"
