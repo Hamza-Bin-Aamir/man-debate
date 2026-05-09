@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-# Validate that any used tab labels appear in src/tabs-registry.txt
+# Validate that tab labels used in tracked content/ files appear in src/tabs-registry.txt
 REG=src/tabs-registry.txt
 if [ ! -f "$REG" ]; then
   echo "No tab registry found at $REG — creating empty template.";
