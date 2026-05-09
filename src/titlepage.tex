@@ -27,10 +27,13 @@
   
   % NATOPS-style border index (black boxes on right margin, full page height)
   \begin{textblock*}{35mm}(175mm,0mm)
-    \setlength{\textheight}{297mm}
-    \setlength{\parskip}{0.6em}
-    \raggedright
-    \listofbooksasboxes
+    {%
+      \setlength{\parskip}{0.6em}%
+      \raggedright
+      \parbox[t][\paperheight][t]{35mm}{%
+        \listofbooksasboxes
+      }%
+    }
   \end{textblock*}
 
   \vspace{1.0cm}
